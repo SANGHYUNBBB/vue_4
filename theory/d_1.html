@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>파일명</title>
+  </head>
+  <body>
+    <div id="app">
+      <p>{{fullName}}</p>
+      <p>{{pricePrint}}</p>
+      <button @click="changeName">d</button>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script type="text/javascript">
+      const { createApp } = Vue;
+
+      let vm = createApp({
+        name: 'App',
+        data() {
+          return {
+            firstName: '상현',
+            lastName: 'bak',
+            price: 100000,
+          };
+        },
+        computed: {
+          fullName() {
+            return `${this.firstName} ${this.lastName}`;
+          },
+          pricePrint() {
+            return `${this.price.toLocaleString()}`;
+          },
+        },
+        methods: {
+          changeName() {
+            this.lastName = 'Brown';
+            this.firstName = 'James';
+          },
+        },
+      });
+
+      vm.mount('#app');
+    </script>
+  </body>
+</html>
