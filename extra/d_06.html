@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>파일명</title>
+    console.log("d")
+  </head>
+  <body>
+    <div id="app">
+      x : <input type="text" v-model.number="x" /><br />
+      y : <input type="text" v-model.number="y" /><br />
+      덧셈 결과 : {{sum}}
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script type="text/javascript">
+      const { createApp, ref, watch } = Vue;
+
+      const app = createApp({
+        setup() {
+          const x = ref(0);
+          const y = ref(0);
+          let sum = ref(0);
+          // watch를 통해 뭘 계속 감시할지 지정할 수 있다.ㅡㅡ
+          watch(x, (current, old) => {
+            console.log(`x:${old}--->${current}`);
+          });
+          //current 는 바뀐 이후인 현재 값. old는 바뀌기 전의 값을 의미한다.
+          watch(y, (current, old) => {
+            console.log(`y:${old}--->${current}`);
+            sum = sum + y;
+            console.log(sum);
+          });
+          return {
+            x,
+            y,
+            sum,
+          };
+        },
+      });
+
+      const vm = app.mount('#app');
+    </script>
+  </body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>파일명</title>
+  </head>
+  <body>
+    <div id="app">
+      1보다 큰 수: <input type="text" v-model="num" />
+      <br />
+      1부터 입력한 값까지의 합: <span>{{sum}}</span><br />
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script type="text/javascript">
+      const { createApp, ref, computed, onMounted, onUpdated } = Vue;
+
+      const app = createApp({
+        setup() {
+          const num = ref(0);
+          const sum = computed(() => {
+            //인스턴스가 생성될때
+            // setup: 컴포넌트 초기화시
+            // API 호출, 이벤트 리스너 설정, 초기 데이터 준비 등.;
+
+            console.log('🤡 created');
+          });
+
+          //onMounted : 컴포넌트가 dom에 마운트 된 이후
+          // DOM 조작;
+          onMounted(() => {
+            console.log('🤦‍♂️mounted');
+          });
+
+          //onUpdated :  컴포넌트의 데이터가 변경되어 dom이 업데이트 된 이후!
+          //업데이트 된 dom에 대한 계산 또는 데이터 동기들;
+          onUpdated(() => {
+            console.log('💰 updated');
+          });
+
+          return {
+            num,
+            sum,
+          };
+        },
+      });
+
+      const vm = app.mount('#app');
+    </script>
+  </body>
+</html>

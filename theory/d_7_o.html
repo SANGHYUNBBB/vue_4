@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>파일명</title>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" placeholder="이메일입력" v-model="email" />
+      <p v-if="emailError">{{emailError}}</p>
+      <p v-if="emailValid">유효한 이메일 형식입니다.</p>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script type="text/javascript">
+      const { createApp } = Vue;
+
+      let vm = createApp({
+        name: 'App',
+        data() {
+          return {
+            email: '',
+            emailError: '',
+            emailValid: false,
+          };
+        },
+        watch: {
+          //이미 정해진 1번 매개변수의 변경된 밸류값
+          // 2번 매개변수 기존의 밸류값!;
+          email(newValue) {
+            if (!newValue) {
+              this.emailError = '';
+              this.emailValid = false;
+              return;
+            }
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(newValue)) {
+              this.emailError = '유효한 이메일 주소를 입력하셍뇨';
+              this.emailValid = false;
+            } else {
+              this.emailError = '';
+              this.emailValid = true;
+            }
+          },
+        },
+      });
+      vm.mount('#app');
+    </script>
+  </body>
+</html>
